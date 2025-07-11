@@ -1,0 +1,14 @@
+# Core ADK and AI dependencies
+google-adk>=1.0.0
+google-genai>=0.5.0
+
+# API and HTTP requests
+requests>=2.31.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Optional: For development and testing
+# pytest>=7.0.0
+# black>=23.0.0
+# flake8>=6.0.0 
