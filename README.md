@@ -90,8 +90,7 @@ This healthcare agent system features a **coordinator agent** that manages two s
    **Required API Keys:**
    - **Google AI API Key**: Get from [Google AI Studio](https://aistudio.google.com/)
    - **Google Places API Key**: Get from [Google Cloud Console](https://console.cloud.google.com/)
-   
-   📖 **For detailed setup instructions, see [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md)**
+
 
 5. **Validate your setup**
    ```bash
@@ -273,12 +272,6 @@ Navigate to `http://localhost:8000` to access the web interface.
 - Requires billing setup after free tier
 - Essential for hospital finder functionality
 
-## 🔄 India-Specific Features
-
-- **Emergency Number**: 108 (India Emergency Services)
-- **Auto-Location**: Detects location via IP for Indian users
-- **Local Hospitals**: Focuses on Indian medical facilities
-- **Regional Support**: Optimized for Indian healthcare system
 
 ## 🌟 Future Enhancements
 
@@ -303,19 +296,6 @@ Navigate to `http://localhost:8000` to access the web interface.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-## 🆘 Support
-
-For support and questions:
-- Create an issue on GitHub
-- Check the documentation
-- Review the environment setup guide
-
-## 🙏 Acknowledgments
-
-- Google's Agent Development Kit team
-- Google AI Studio and Places API
-- Healthcare professionals who provided domain guidance
-- Open source community contributions
 
 ---
 

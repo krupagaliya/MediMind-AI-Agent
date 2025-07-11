@@ -28,6 +28,7 @@ hospital_finder_tool = AgentTool(agent=hospital_finder_agent)
 root_agent = Agent(
     name="healthcare_coordinator",
     model="gemini-2.0-flash",
+    # model="gemini-2.0-flash-live-001",
     description=(
         "Main healthcare coordinator that manages two specialized sub-agents: "
         "a symptom analyzer for health assessments and a hospital finder for location services."
