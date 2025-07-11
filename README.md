@@ -75,9 +75,18 @@ This healthcare agent system features a **coordinator agent** that manages two s
    **Option B: Manual setup**
    Create a `.env` file in the root directory:
    ```env
+   # For Google AI Studio (default)
    GOOGLE_API_KEY=your_google_ai_api_key_here
-   GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
    GOOGLE_GENAI_USE_VERTEXAI=False
+   
+   # For Vertex AI (alternative)
+   GOOGLE_GENAI_USE_VERTEXAI=True
+   GOOGLE_CLOUD_PROJECT=your_project_id
+   GOOGLE_CLOUD_LOCATION=us-central1
+   GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
+   
+   # Required for both
+   GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
    DEFAULT_MODEL=gemini-2.0-flash
    ```
 
@@ -87,8 +96,20 @@ This healthcare agent system features a **coordinator agent** that manages two s
    python setup_env.py --help
    ```
    
-   **Required API Keys:**
+   **Required API Keys & Authentication:**
+   
+   **Option A: Google AI Studio (Recommended for beginners)**
    - **Google AI API Key**: Get from [Google AI Studio](https://aistudio.google.com/)
+   - Set `GOOGLE_GENAI_USE_VERTEXAI=False` in `.env`
+   
+   **Option B: Vertex AI (Enterprise/Production)**
+   - **Google Cloud Project**: Create project in [Google Cloud Console](https://console.cloud.google.com/)
+   - **Service Account**: Create service account with Vertex AI permissions
+   - **Service Account Key**: Download JSON key file
+   - Set `GOOGLE_GENAI_USE_VERTEXAI=True` in `.env`
+   - Set `GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json`
+   
+   **Both options require:**
    - **Google Places API Key**: Get from [Google Cloud Console](https://console.cloud.google.com/)
 
 
@@ -97,7 +118,12 @@ This healthcare agent system features a **coordinator agent** that manages two s
    python setup_env.py --validate
    ```
 
-6. **Run the agent**
+6. **Choose your AI service**
+   Edit your `.env` file to select either:
+   - **Google AI Studio**: Set `GOOGLE_GENAI_USE_VERTEXAI=False` (default)
+   - **Vertex AI**: Set `GOOGLE_GENAI_USE_VERTEXAI=True` (enterprise)
+
+7. **Run the agent**
    ```bash
    adk web
    ```
@@ -138,15 +164,50 @@ The system uses a `.env` file for configuration loaded automatically using `pyth
 
 ### Required Environment Variables
 
-- `GOOGLE_API_KEY`: Your Google AI API key (required)
+**Always Required:**
 - `GOOGLE_PLACES_API_KEY`: Your Google Places API key (required)
+
+**For Google AI Studio:**
+- `GOOGLE_API_KEY`: Your Google AI API key (required)
+- `GOOGLE_GENAI_USE_VERTEXAI`: Set to `False`
+
+**For Vertex AI:**
+- `GOOGLE_GENAI_USE_VERTEXAI`: Set to `True`
+- `GOOGLE_CLOUD_PROJECT`: Your Google Cloud project ID (required)
+- `GOOGLE_APPLICATION_CREDENTIALS`: Path to service account JSON file (required)
 
 ### Optional Configuration
 
-- `GOOGLE_GENAI_USE_VERTEXAI`: Use Vertex AI instead of AI Studio (default: False)
-- `GOOGLE_CLOUD_PROJECT`: Project ID for Vertex AI (required if using Vertex AI)
-- `GOOGLE_CLOUD_LOCATION`: Location for Vertex AI (default: us-central1)
+**For Google AI Studio (default):**
+- `GOOGLE_GENAI_USE_VERTEXAI`: Set to `False` (default)
 - `DEFAULT_MODEL`: AI model to use (default: gemini-2.0-flash)
+
+**For Vertex AI:**
+- `GOOGLE_GENAI_USE_VERTEXAI`: Set to `True`
+- `GOOGLE_CLOUD_PROJECT`: Your Google Cloud project ID (required)
+- `GOOGLE_CLOUD_LOCATION`: Location for Vertex AI (default: us-central1)
+- `GOOGLE_APPLICATION_CREDENTIALS`: Path to service account JSON file (required)
+- `DEFAULT_MODEL`: AI model to use (default: gemini-2.0-flash)
+
+### Example Configurations
+
+**Google AI Studio Setup (.env file):**
+```env
+GOOGLE_API_KEY=your_actual_api_key_here
+GOOGLE_GENAI_USE_VERTEXAI=False
+GOOGLE_PLACES_API_KEY=your_places_api_key_here
+DEFAULT_MODEL=gemini-2.0-flash
+```
+
+**Vertex AI Setup (.env file):**
+```env
+GOOGLE_GENAI_USE_VERTEXAI=True
+GOOGLE_CLOUD_PROJECT=your-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_APPLICATION_CREDENTIALS=./path/to/your-service-account-key.json
+GOOGLE_PLACES_API_KEY=your_places_api_key_here
+DEFAULT_MODEL=gemini-2.0-flash
+```
 
 ### Setup Helper Commands
 
@@ -223,6 +284,8 @@ In case of medical emergency, call emergency services immediately:
 - All interactions are processed in real-time
 - Location detection is automatic and temporary
 - API calls are secured with proper authentication
+- Service account credentials are kept local and secure
+- Vertex AI provides additional enterprise security features
 
 ## 🧪 Testing
 
@@ -262,15 +325,26 @@ Navigate to `http://localhost:8000` to access the web interface.
 
 ## 📚 API Requirements
 
-### Google AI Studio API
+### Google AI Services
+
+**Google AI Studio API (Option A)**
 - Used for agent language model capabilities
 - Free tier available for moderate usage
-- Required for all agent responses
+- Easier setup for development and testing
+- Required when `GOOGLE_GENAI_USE_VERTEXAI=False`
+
+**Vertex AI (Option B)**
+- Google Cloud's enterprise AI platform
+- More advanced features and enterprise support
+- Requires Google Cloud project and service account
+- Better for production deployments
+- Required when `GOOGLE_GENAI_USE_VERTEXAI=True`
 
 ### Google Places API
 - Used for hospital and medical facility search
 - Requires billing setup after free tier
 - Essential for hospital finder functionality
+- Required for both AI Studio and Vertex AI setups
 
 
 ## 🌟 Future Enhancements

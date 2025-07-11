@@ -134,9 +134,13 @@ dmypy.json
 !tsconfig.json
 service-account-*.json
 *-service-account.json
+*-service-account-key.json
+service-account-key.json
 credentials.json
 google-credentials.json
 gcp-credentials.json
+key.json
+auth.json
 
 # IDE files
 .vscode/

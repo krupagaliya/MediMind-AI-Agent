@@ -20,6 +20,7 @@ GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
 # Google Cloud Configuration (if using Vertex AI)
 GOOGLE_CLOUD_PROJECT=your_project_id
 GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
 
 # Application Configuration
 LOG_LEVEL=INFO
@@ -91,18 +92,36 @@ def validate_env_file():
         'GOOGLE_PLACES_API_KEY': 'Google Places API key'
     }
     
+    vertex_ai_vars = {
+        'GOOGLE_CLOUD_PROJECT': 'Google Cloud project ID',
+        'GOOGLE_APPLICATION_CREDENTIALS': 'Path to service account JSON file'
+    }
+    
     missing_vars = []
     placeholder_vars = []
+    vertex_ai_enabled = False
     
     try:
         with open(env_file_path, 'r') as f:
             content = f.read()
+            
+        # Check if Vertex AI is enabled
+        if "GOOGLE_GENAI_USE_VERTEXAI=True" in content:
+            vertex_ai_enabled = True
             
         for var_name, description in required_vars.items():
             if f"{var_name}=" not in content:
                 missing_vars.append(f"{var_name} ({description})")
             elif f"{var_name}=your_" in content:
                 placeholder_vars.append(f"{var_name} ({description})")
+        
+        # Check Vertex AI specific variables if enabled
+        if vertex_ai_enabled:
+            for var_name, description in vertex_ai_vars.items():
+                if f"{var_name}=" not in content:
+                    missing_vars.append(f"{var_name} ({description}) - Required for Vertex AI")
+                elif f"{var_name}=your_" in content or f"{var_name}=path/to/" in content:
+                    placeholder_vars.append(f"{var_name} ({description}) - Required for Vertex AI")
     
         if missing_vars:
             print("❌ Missing required environment variables:")
@@ -117,9 +136,13 @@ def validate_env_file():
         
         if not missing_vars and not placeholder_vars:
             print("✅ Environment variables look good!")
+            if vertex_ai_enabled:
+                print("🔧 Vertex AI is enabled - make sure your service account JSON file exists at the specified path.")
             return True
         else:
             print(f"\n📝 Edit {env_file_path} and replace placeholder values with your actual API keys.")
+            if vertex_ai_enabled:
+                print("🔧 Note: Vertex AI is enabled, make sure to provide valid Google Cloud credentials.")
             return False
             
     except Exception as e:
@@ -148,11 +171,23 @@ def show_api_key_instructions():
     print("5. Copy the API key")
     print("6. Paste it in your .env file as: GOOGLE_PLACES_API_KEY=your_actual_api_key")
     
+    print("\n🔒 Google Cloud Service Account (for Vertex AI):")
+    print("1. Go to https://console.cloud.google.com/")
+    print("2. Navigate to 'IAM & Admin' > 'Service Accounts'")
+    print("3. Create a new service account or use existing one")
+    print("4. Add roles: 'Vertex AI User' and 'AI Platform Developer'")
+    print("5. Create and download the JSON key file")
+    print("6. Save the JSON file in your project directory")
+    print("7. Update .env file: GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json")
+    
     print("\n💡 Pro Tips:")
     print("- Keep your API keys secure and never share them publicly")
     print("- Consider setting usage limits on your API keys")
     print("- The Google AI API key is usually free for moderate usage")
     print("- Google Places API may require billing setup after free tier")
+    print("- For Vertex AI: Set GOOGLE_GENAI_USE_VERTEXAI=True in .env")
+    print("- For AI Studio: Set GOOGLE_GENAI_USE_VERTEXAI=False in .env")
+    print("- Service account JSON files should never be committed to version control")
 
 def main():
     """Main function"""
