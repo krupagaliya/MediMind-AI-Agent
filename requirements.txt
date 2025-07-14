@@ -11,4 +11,7 @@ python-dotenv>=1.0.0
 # Optional: For development and testing
 # pytest>=7.0.0
 # black>=23.0.0
-# flake8>=6.0.0 
+# flake8>=6.0.0
+
+# Optional: For deployment to Vertex AI
+# google-cloud-aiplatform[agent_engines]>=1.93.1
