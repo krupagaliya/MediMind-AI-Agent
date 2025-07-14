@@ -1,0 +1,21 @@
+# Healthcare Agent Deployment Configuration Template
+# Copy this file to .env1 and replace placeholder values with your actual configuration
+
+# Google Cloud Configuration
+GOOGLE_CLOUD_PROJECT=your-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_CLOUD_STORAGE_BUCKET=your-staging-bucket
+
+# API Keys
+GOOGLE_PLACES_API_KEY=your-places-api-key
+GOOGLE_API_KEY=your-google-ai-api-key
+
+# Deployment Configuration (Optional)
+DEPLOYMENT_NAME=Healthcare-Agent-ADK
+DEPLOYMENT_DESCRIPTION=Healthcare Agent System with symptom analysis and hospital finder
+
+# Instructions:
+# 1. Copy this file: cp .env1.template .env1
+# 2. Replace all placeholder values with your actual configuration
+# 3. Never commit .env1 to version control
+# 4. Run: python deploy.py create 

@@ -128,6 +128,30 @@ This healthcare agent system features a **coordinator agent** that manages two s
    adk web
    ```
 
+## 🚀 Deployment to Google Cloud vertex AI Engine.
+
+For production deployment to Google Cloud Vertex AI, see the [Deployment Guide](deploy_guide.md).
+
+### Quick Deployment
+
+1. **Create deployment configuration:**
+   ```bash
+   cp .env1.template .env1
+   # Edit .env1 with your Google Cloud settings
+   ```
+
+2. **Deploy to Vertex AI:**
+   ```bash
+   python deploy.py create
+   ```
+
+3. **Test deployment:**
+   ```bash
+   python deploy.py test <resource_id>
+   ```
+
+For detailed instructions, troubleshooting, and best practices, see [deploy_guide.md](deploy_guide.md).
+
 ## 📋 Usage Examples
 
 ### Basic Interactions
@@ -236,8 +260,11 @@ agent-demo-health/
 │   ├── symptom_agent.py         # Symptom analyzer agent
 │   └── hospital_finder_agent.py # Hospital finder agent
 ├── setup_env.py                 # Environment setup script
+├── deploy.py                    # Deployment script for Vertex AI
+├── deploy_guide.md              # Comprehensive deployment guide
 ├── requirements.txt             # Python dependencies
 ├── .env                         # Environment variables (created by setup)
+├── .env1.template               # Template for deployment configuration
 └── README.md                    # This file
 ```
 
