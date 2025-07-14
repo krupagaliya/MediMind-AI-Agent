@@ -263,6 +263,8 @@ agent-demo-health/
 ├── deploy.py                    # Deployment script for Vertex AI
 ├── deploy_guide.md              # Comprehensive deployment guide
 ├── requirements.txt             # Python dependencies
+├── LICENSE                      # MIT licence
+├── Agent_demo_colab.ipynb       # Notebook to run the agent in Google Colab.
 ├── .env                         # Environment variables (created by setup)
 ├── .env1.template               # Template for deployment configuration
 └── README.md                    # This file
