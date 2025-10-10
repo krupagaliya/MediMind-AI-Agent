@@ -4,7 +4,7 @@ Contains all prompts and instructions for the healthcare agents
 """
 
 # Main coordinator agent prompt
-COORDINATOR_PROMPT = """You are a helpful healthcare coordinator managing two specialized assistants:
+COORDINATOR_PROMPT = """You are a helpful healthcare coordinator managing three specialized assistants:
 
 **Sub-Agent 1: Symptom Analyzer** (symptom_analyzer)
 - Greets patients warmly and understands their concerns
@@ -19,6 +19,13 @@ COORDINATOR_PROMPT = """You are a helpful healthcare coordinator managing two sp
 - Provides hospital details: address, phone, rating, hours
 - Locates emergency hospitals and specialists
 - Calculates distances and provides directions
+
+**Sub-Agent 3: Home Remedies Advisor** (home_remedies_advisor)
+- Suggests natural, safe home remedies for light symptoms only
+- Provides preparation instructions using common household items
+- Offers safety guidance and knows when to refer to medical care
+- Specializes in traditional remedies for mild conditions
+- Uses Google Search for additional remedy information
 
 **Your Role as Coordinator:**
 1. **Determine user needs** - Understand what the user is asking for
@@ -41,10 +48,20 @@ COORDINATOR_PROMPT = """You are a helpful healthcare coordinator managing two sp
   - Finding medical specialists in specific areas
   - Getting directions to medical facilities
 
+- Use **home_remedies_advisor** for:
+  - Natural remedies for light/mild symptoms only
+  - Home remedy preparation instructions
+  - Traditional remedies using household items
+  - Mild conditions like light headaches, minor coughs, slight nausea
+  - When user specifically asks for home remedies or natural treatments
+
 **Coordination Examples:**
 - If someone has symptoms AND needs a hospital: First analyze symptoms, then find appropriate medical facilities
 - If someone needs emergency help: Provide emergency guidance AND find nearest emergency hospitals
 - If someone asks about a condition: Provide health information AND suggest nearby specialists
+- If someone has light symptoms AND asks for home remedies: Use home_remedies_advisor for natural treatments
+- If someone has mild symptoms: Offer both medical assessment AND home remedy options
+- If symptoms are severe: Use symptom_analyzer and hospital_finder, avoid home remedies
 
 **Important Guidelines:**
 - Always prioritize patient safety and emergency situations
@@ -122,7 +139,7 @@ Example interactions:
 - 'Here are the top-rated hospitals near you with their contact information.'
 - 'For your emergency situation, here are the closest hospitals with directions. Remember to call 108 immediately.'"""
 
-# Emergency guidance templates
+# # To Be Use in the Future: Emergency guidance templates
 EMERGENCY_GUIDANCE = {
     "heart_attack": {
         "signs": ["Chest pain", "Shortness of breath", "Nausea", "Sweating", "Pain in arm or jaw"],
@@ -175,7 +192,7 @@ EMERGENCY_GUIDANCE = {
     }
 }
 
-# Common symptoms database
+# To Be Use in the Future: Common symptoms database
 SYMPTOMS_DATABASE = {
     "fever": {
         "conditions": ["Common cold", "Flu", "Viral infection", "Bacterial infection"],
@@ -219,7 +236,7 @@ SYMPTOMS_DATABASE = {
     }
 }
 
-# Health information database
+# To Be Use in the Future: Health information database
 HEALTH_INFO_DATABASE = {
     "diabetes": {
         "description": "A condition where blood sugar levels are too high",
@@ -250,6 +267,196 @@ HEALTH_INFO_DATABASE = {
         "symptoms": ["Fever", "Body aches", "Fatigue", "Cough"],
         "care": ["Rest", "Stay hydrated", "Use fever reducers if needed", "Isolate from others"],
         "when_to_seek_help": "If breathing difficulties or high fever persists"
+    }
+}
+
+# Home remedies agent prompt
+HOME_REMEDIES_PROMPT = """You are a knowledgeable home remedies advisor specializing in natural, safe remedies for light symptoms. Your role is to:
+
+1. **Assess symptom severity** - Determine if symptoms are light/mild and suitable for home remedies
+2. **Suggest natural remedies** - Provide safe, effective home remedies using common household items
+3. **Provide preparation instructions** - Give clear, step-by-step instructions for remedy preparation
+4. **Safety guidance** - Ensure all suggestions are safe and appropriate for the user
+5. **Know limitations** - Recognize when symptoms require professional medical attention
+
+**When to suggest home remedies:**
+- Light symptoms like mild headaches, minor coughs, slight nausea
+- Common cold symptoms (runny nose, mild sore throat)
+- Minor digestive issues (mild indigestion, bloating)
+- Light skin irritations or minor cuts
+- Mild stress or anxiety
+- Minor muscle aches or tension
+
+**When NOT to suggest home remedies (refer to medical care):**
+- High fever (above 101°F/38.3°C)
+- Severe pain or persistent symptoms
+- Breathing difficulties
+- Chest pain or heart-related symptoms
+- Severe allergic reactions
+- Symptoms lasting more than a few days
+- Any emergency situations
+
+**Home Remedy Categories:**
+- **Herbal teas and drinks** (ginger tea, honey-lemon water, turmeric milk)
+- **Kitchen ingredients** (garlic, honey, ginger, turmeric, salt water)
+- **Essential oils and aromatherapy** (eucalyptus, peppermint, lavender)
+- **Hot/cold therapy** (warm compresses, ice packs)
+- **Dietary remedies** (BRAT diet, probiotics, hydration)
+- **Relaxation techniques** (breathing exercises, gentle stretches)
+
+**Important Guidelines:**
+- Always emphasize that these are for LIGHT symptoms only
+- Include preparation instructions and dosage guidance
+- Mention any potential allergies or contraindications
+- Suggest when to seek medical attention if symptoms worsen
+- Include the medical disclaimer in all responses
+- Focus on evidence-based, traditional remedies with good safety profiles
+
+**Example interactions:**
+- 'For your mild headache, I can suggest some gentle home remedies...'
+- 'These light cold symptoms can often be helped with natural remedies...'
+- 'Let me suggest some safe home remedies for your minor digestive discomfort...'
+- 'Your symptoms seem mild enough for home care, but let me know if they worsen...'"""
+
+# To Be Use in the Future: Home remedies database
+HOME_REMEDIES_DATABASE = {
+    "mild_headache": {
+        "remedies": [
+            {
+                "name": "Peppermint Oil Compress",
+                "ingredients": ["2-3 drops peppermint oil", "1 cup cool water", "Clean cloth"],
+                "preparation": "Mix peppermint oil with water, soak cloth, apply to forehead for 10-15 minutes",
+                "benefits": "Natural cooling effect, reduces tension"
+            },
+            {
+                "name": "Ginger Tea",
+                "ingredients": ["1 inch fresh ginger", "1 cup hot water", "Honey (optional)"],
+                "preparation": "Steep sliced ginger in hot water for 10 minutes, add honey if desired",
+                "benefits": "Anti-inflammatory properties, improves circulation"
+            },
+            {
+                "name": "Hydration Therapy",
+                "ingredients": ["Water", "Pinch of sea salt", "Lemon juice"],
+                "preparation": "Drink 2-3 glasses of water with a pinch of salt and lemon",
+                "benefits": "Rehydrates body, balances electrolytes"
+            }
+        ],
+        "additional_tips": ["Rest in a dark, quiet room", "Gentle neck and shoulder massage", "Avoid screens and bright lights"]
+    },
+    "mild_cough": {
+        "remedies": [
+            {
+                "name": "Honey and Warm Water",
+                "ingredients": ["1-2 tablespoons honey", "1 cup warm water", "Lemon juice (optional)"],
+                "preparation": "Mix honey in warm water, add lemon if desired, sip slowly",
+                "benefits": "Soothes throat, natural antibacterial properties"
+            },
+            {
+                "name": "Turmeric Milk",
+                "ingredients": ["1 cup warm milk", "1/2 teaspoon turmeric powder", "Pinch of black pepper"],
+                "preparation": "Mix turmeric and pepper in warm milk, drink before bedtime",
+                "benefits": "Anti-inflammatory, boosts immunity"
+            },
+            {
+                "name": "Steam Inhalation",
+                "ingredients": ["Hot water", "2-3 drops eucalyptus oil (optional)"],
+                "preparation": "Inhale steam from hot water for 5-10 minutes, cover head with towel",
+                "benefits": "Loosens mucus, soothes airways"
+            }
+        ],
+        "additional_tips": ["Stay hydrated", "Use a humidifier", "Avoid cold drinks", "Rest your voice"]
+    },
+    "mild_nausea": {
+        "remedies": [
+            {
+                "name": "Ginger Tea",
+                "ingredients": ["1 inch fresh ginger", "1 cup hot water", "Honey"],
+                "preparation": "Steep ginger in hot water for 10 minutes, add honey to taste",
+                "benefits": "Natural anti-nausea properties, settles stomach"
+            },
+            {
+                "name": "Peppermint Tea",
+                "ingredients": ["Fresh peppermint leaves or tea bag", "1 cup hot water"],
+                "preparation": "Steep peppermint in hot water for 5-7 minutes",
+                "benefits": "Calms digestive system, reduces nausea"
+            },
+            {
+                "name": "BRAT Diet",
+                "ingredients": ["Bananas", "Rice", "Applesauce", "Toast"],
+                "preparation": "Eat small portions of bland foods",
+                "benefits": "Easy to digest, helps settle stomach"
+            }
+        ],
+        "additional_tips": ["Eat small, frequent meals", "Avoid strong odors", "Stay hydrated with small sips"]
+    },
+    "mild_sore_throat": {
+        "remedies": [
+            {
+                "name": "Salt Water Gargle",
+                "ingredients": ["1/2 teaspoon salt", "1 cup warm water"],
+                "preparation": "Dissolve salt in warm water, gargle for 30 seconds, repeat 3-4 times daily",
+                "benefits": "Reduces inflammation, kills bacteria"
+            },
+            {
+                "name": "Honey and Lemon",
+                "ingredients": ["1 tablespoon honey", "1 tablespoon lemon juice", "1 cup warm water"],
+                "preparation": "Mix honey and lemon in warm water, sip slowly",
+                "benefits": "Soothes throat, provides vitamin C"
+            },
+            {
+                "name": "Turmeric Gargle",
+                "ingredients": ["1/2 teaspoon turmeric", "1/2 teaspoon salt", "1 cup warm water"],
+                "preparation": "Mix ingredients, gargle for 30 seconds, repeat twice daily",
+                "benefits": "Anti-inflammatory and antimicrobial properties"
+            }
+        ],
+        "additional_tips": ["Stay hydrated", "Use a humidifier", "Avoid irritants like smoke"]
+    },
+    "mild_indigestion": {
+        "remedies": [
+            {
+                "name": "Fennel Seed Tea",
+                "ingredients": ["1 teaspoon fennel seeds", "1 cup hot water"],
+                "preparation": "Steep fennel seeds in hot water for 10 minutes, strain and drink",
+                "benefits": "Aids digestion, reduces bloating"
+            },
+            {
+                "name": "Ajwain (Carom Seeds) Water",
+                "ingredients": ["1 teaspoon ajwain", "1 cup warm water"],
+                "preparation": "Soak ajwain in warm water for 10 minutes, strain and drink",
+                "benefits": "Improves digestion, reduces gas"
+            },
+            {
+                "name": "Lemon and Baking Soda",
+                "ingredients": ["1 tablespoon lemon juice", "1/2 teaspoon baking soda", "1 cup water"],
+                "preparation": "Mix ingredients, drink slowly when fizzing stops",
+                "benefits": "Neutralizes stomach acid, aids digestion"
+            }
+        ],
+        "additional_tips": ["Eat smaller meals", "Avoid spicy foods", "Take a gentle walk after eating"]
+    },
+    "minor_stress": {
+        "remedies": [
+            {
+                "name": "Chamomile Tea",
+                "ingredients": ["1 chamomile tea bag or 1 tsp dried chamomile", "1 cup hot water", "Honey (optional)"],
+                "preparation": "Steep chamomile in hot water for 5-7 minutes, add honey if desired",
+                "benefits": "Natural relaxant, promotes calm"
+            },
+            {
+                "name": "Lavender Aromatherapy",
+                "ingredients": ["2-3 drops lavender essential oil", "Diffuser or tissue"],
+                "preparation": "Add oil to diffuser or inhale from tissue for 5-10 minutes",
+                "benefits": "Reduces anxiety, promotes relaxation"
+            },
+            {
+                "name": "Deep Breathing Exercise",
+                "ingredients": ["Just yourself and a quiet space"],
+                "preparation": "Breathe in for 4 counts, hold for 4, exhale for 6, repeat 10 times",
+                "benefits": "Activates relaxation response, reduces stress hormones"
+            }
+        ],
+        "additional_tips": ["Practice regular meditation", "Get adequate sleep", "Exercise regularly", "Limit caffeine"]
     }
 }
 

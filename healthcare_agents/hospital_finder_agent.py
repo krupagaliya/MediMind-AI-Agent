@@ -10,7 +10,7 @@ import requests
 import json
 from typing import List, Any, Optional, Tuple
 from dotenv import load_dotenv
-from google.adk.agents import Agent
+from google.adk.agents import LlmAgent
 from google.adk.tools import FunctionTool
 from .prompt import HOSPITAL_FINDER_PROMPT
 
@@ -128,7 +128,7 @@ def find_nearby_hospitals(radius: int = 5000) -> str:
 find_hospitals_tool = FunctionTool(func=find_nearby_hospitals)
 
 # Create the Hospital Finder Agent with auto-location detection
-hospital_finder_agent = Agent(
+hospital_finder_agent = LlmAgent(
     name="hospital_finder",
     model="gemini-2.0-flash",
     description=(
