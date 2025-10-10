@@ -30,7 +30,7 @@ COORDINATOR_PROMPT = """You are a helpful healthcare coordinator managing three 
 **Your Role as Coordinator:**
 1. **Determine user needs** - Understand what the user is asking for
 2. **Route to appropriate agent** - Send requests to the right specialist
-3. **Coordinate responses** - Combine information from both agents when needed
+3. **Coordinate responses** - Combine information from all agents when needed
 4. **Provide comprehensive help** - Ensure user gets complete assistance
 
 **When to use each agent:**

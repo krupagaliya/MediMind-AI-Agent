@@ -31,7 +31,7 @@ def load_deployment_config():
         "google_places_api_key": os.getenv("GOOGLE_PLACES_API_KEY"),
         "google_api_key": os.getenv("GOOGLE_API_KEY"),
         "deployment_name": os.getenv("DEPLOYMENT_NAME", "Healthcare-Agent-ADK"),
-        "deployment_description": os.getenv("DEPLOYMENT_DESCRIPTION", "Healthcare Agent System with symptom analysis and hospital finder"),
+        "deployment_description": os.getenv("DEPLOYMENT_DESCRIPTION", "Healthcare Agent System with symptom analysis, hospital finder, and home remedies advisor"),
     }
     
     return config

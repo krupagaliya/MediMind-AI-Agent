@@ -4,7 +4,7 @@ A specialized healthcare assistant system built using Google's Agent Development
 
 ## 🏥 Overview
 
-This healthcare agent system features a **coordinator agent** that manages two specialized sub-agents:
+This healthcare agent system features a **coordinator agent** that manages three specialized sub-agents:
 
 ### 🩺 Agent 1: Symptom Analyzer
 - **Friendly Patient Interaction**: Warmly greets patients and understands their health concerns
@@ -20,6 +20,14 @@ This healthcare agent system features a **coordinator agent** that manages two s
 - **Emergency Hospitals**: Locates emergency hospitals and urgent care centers
 - **India-Focused**: Optimized for Indian healthcare system with local emergency numbers
 
+### 🌿 Agent 3: Home Remedies Advisor
+- **Natural Remedy Suggestions**: Provides safe, effective home remedies for light symptoms
+- **Common Household Items**: Uses easily available ingredients like ginger, honey, turmeric
+- **Preparation Instructions**: Clear, step-by-step instructions for remedy preparation
+- **Safety-First Approach**: Assesses symptom severity and knows when to refer to medical care
+- **Traditional Remedies**: Focuses on evidence-based, traditional remedies with good safety profiles
+- **Google Search Integration**: Uses Google Search for additional remedy information
+
 ## 🚀 Features
 
 ### Coordinator Agent Capabilities
@@ -33,6 +41,7 @@ This healthcare agent system features a **coordinator agent** that manages two s
    - Combines symptom analysis with hospital location services
    - Provides emergency guidance with nearby hospital information
    - Offers health information with specialist recommendations
+   - Integrates natural home remedies for mild symptoms with professional care guidance
 
 ### Current Implementation Features
 
@@ -40,6 +49,7 @@ This healthcare agent system features a **coordinator agent** that manages two s
 - **India Emergency Integration**: Uses 108 emergency number
 - **Real-time Hospital Search**: Live data from Google Places API
 - **Medical Information Search**: Google Search integration for medical queries
+- **Natural Home Remedies**: Safe, traditional remedies for light symptoms using household items
 - **Safety-First Approach**: Prioritizes emergency situations and professional medical care
 
 ## 🛠️ Installation
@@ -174,12 +184,21 @@ The system provides a web interface where users can interact with the healthcare
    - User: "Tell me about diabetes"
    - System: Provides comprehensive information about diabetes and management
 
+5. **Home Remedies**
+   - User: "I have a mild headache, any natural remedies?"
+   - System: Suggests safe home remedies like peppermint oil compress or ginger tea with preparation instructions
+
+6. **Combined Assistance**
+   - User: "I have a cold, what can I do?"
+   - System: Provides home remedies for mild symptoms AND finds nearby pharmacies or clinics if needed
+
 ### System Responses Include
 
 - **Symptom Analysis**: Preliminary assessment with urgency levels
 - **Hospital Information**: Name, address, phone, rating, hours, and status
 - **Emergency Guidance**: Step-by-step instructions for emergency situations
 - **Health Information**: Condition descriptions, symptoms, and care recommendations
+- **Home Remedies**: Natural remedy suggestions with preparation instructions and safety guidance
 - **Safety Reminders**: Always includes medical disclaimers and emergency number (108)
 
 ## 🔧 Configuration
@@ -258,7 +277,8 @@ agent-demo-health/
 │   ├── config.py                # Configuration management
 │   ├── prompt.py                # All agent prompts and instructions
 │   ├── symptom_agent.py         # Symptom analyzer agent
-│   └── hospital_finder_agent.py # Hospital finder agent
+│   ├── hospital_finder_agent.py # Hospital finder agent
+│   └── home_remedies_agent.py   # Home remedies advisor agent
 ├── setup_env.py                 # Environment setup script
 ├── deploy.py                    # Deployment script for Vertex AI
 ├── deploy_guide.md              # Comprehensive deployment guide
@@ -286,6 +306,12 @@ agent-demo-health/
    - Auto-location detection via IP address
    - Google Places API integration
    - Real-time hospital information retrieval
+
+4. **Home Remedies Advisor** (`home_remedies_advisor`)
+   - Natural remedy suggestions for light symptoms
+   - Preparation instructions using household items
+   - Safety assessment and medical referral guidance
+   - Google Search integration for additional remedy information
 
 ### Key Technologies
 
@@ -334,6 +360,8 @@ Navigate to `http://localhost:8000` to access the web interface.
 2. **Hospital Search**: Verify location detection and hospital results
 3. **Emergency Situations**: Test emergency guidance responses
 4. **Health Information**: Query various medical conditions
+5. **Home Remedies**: Test natural remedy suggestions for mild symptoms
+6. **Multi-Agent Coordination**: Test scenarios requiring multiple agents (e.g., cold symptoms with both remedies and nearby pharmacies)
 
 ## 🤝 Contributing
 
@@ -390,7 +418,13 @@ Navigate to `http://localhost:8000` to access the web interface.
    - Multi-city hospital search
    - Specialist finder by specialty
 
-3. **User Experience**
+3. **Expanded Home Remedies**
+   - Larger database of traditional remedies
+   - Regional and cultural remedy variations
+   - Seasonal remedy recommendations
+   - Integration with local ingredient availability
+
+4. **User Experience**
    - Multi-language support
    - Voice interaction capabilities
    - Mobile-optimized interface

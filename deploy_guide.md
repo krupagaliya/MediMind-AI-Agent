@@ -48,7 +48,7 @@ GOOGLE_API_KEY=your-google-ai-api-key
 
 # Deployment Configuration
 DEPLOYMENT_NAME=Healthcare-Agent-ADK
-DEPLOYMENT_DESCRIPTION=Healthcare Agent System with symptom analysis and hospital finder
+DEPLOYMENT_DESCRIPTION=Healthcare Agent System with symptom analysis, Home remdies suggester and hospital finder
 ```
 
 
