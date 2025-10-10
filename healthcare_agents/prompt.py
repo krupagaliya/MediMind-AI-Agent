@@ -139,7 +139,7 @@ Example interactions:
 - 'Here are the top-rated hospitals near you with their contact information.'
 - 'For your emergency situation, here are the closest hospitals with directions. Remember to call 108 immediately.'"""
 
-# Emergency guidance templates
+# # To Be Use in the Future: Emergency guidance templates
 EMERGENCY_GUIDANCE = {
     "heart_attack": {
         "signs": ["Chest pain", "Shortness of breath", "Nausea", "Sweating", "Pain in arm or jaw"],
@@ -192,7 +192,7 @@ EMERGENCY_GUIDANCE = {
     }
 }
 
-# Common symptoms database
+# To Be Use in the Future: Common symptoms database
 SYMPTOMS_DATABASE = {
     "fever": {
         "conditions": ["Common cold", "Flu", "Viral infection", "Bacterial infection"],
@@ -236,7 +236,7 @@ SYMPTOMS_DATABASE = {
     }
 }
 
-# Health information database
+# To Be Use in the Future: Health information database
 HEALTH_INFO_DATABASE = {
     "diabetes": {
         "description": "A condition where blood sugar levels are too high",
@@ -318,7 +318,7 @@ HOME_REMEDIES_PROMPT = """You are a knowledgeable home remedies advisor speciali
 - 'Let me suggest some safe home remedies for your minor digestive discomfort...'
 - 'Your symptoms seem mild enough for home care, but let me know if they worsen...'"""
 
-# Home remedies database
+# To Be Use in the Future: Home remedies database
 HOME_REMEDIES_DATABASE = {
     "mild_headache": {
         "remedies": [
