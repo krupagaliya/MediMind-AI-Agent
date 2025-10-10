@@ -1,6 +1,6 @@
 # Core ADK and AI dependencies
-google-adk>=1.0.0
-google-genai>=0.5.0
+google-adk>=1.15.1
+google-genai==1.40.0
 
 # API and HTTP requests
 requests>=2.31.0

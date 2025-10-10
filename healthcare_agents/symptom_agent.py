@@ -6,7 +6,7 @@ All prompts are stored in prompt.py
 
 import os
 from dotenv import load_dotenv
-from google.adk.agents import Agent
+from google.adk.agents import LlmAgent
 from google.adk.tools import google_search
 from .prompt import SYMPTOM_ANALYZER_PROMPT
 
@@ -14,7 +14,7 @@ from .prompt import SYMPTOM_ANALYZER_PROMPT
 load_dotenv()
 
 # Create the Symptom Analysis Agent with only Google Search
-symptom_agent = Agent(
+symptom_agent = LlmAgent(
     name="symptom_analyzer",
     model="gemini-2.0-flash",
     description=(
