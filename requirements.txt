@@ -1,17 +1,17 @@
 # Core ADK and AI dependencies
-google-adk>=1.15.1
+google-adk==1.15.1
 google-genai==1.40.0
 
 # API and HTTP requests
-requests>=2.31.0
+requests==2.31.0
 
 # Environment management
-python-dotenv>=1.0.0
+python-dotenv==1.0.0
 
 # Optional: For development and testing
-# pytest>=7.0.0
-# black>=23.0.0
-# flake8>=6.0.0
+# pytest==7.0.0
+# black==23.0.0
+# flake8==6.0.0
 
 # Optional: For deployment to Vertex AI
-# google-cloud-aiplatform[agent_engines]>=1.93.1
+# google-cloud-aiplatform[agent_engines]==1.93.1

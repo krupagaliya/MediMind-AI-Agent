@@ -52,91 +52,94 @@ This healthcare agent system features a **coordinator agent** that manages three
 - **Natural Home Remedies**: Safe, traditional remedies for light symptoms using household items
 - **Safety-First Approach**: Prioritizes emergency situations and professional medical care
 
-## 🛠️ Installation
+## 🚀 Getting Started
+
+This section will guide you through setting up and running the MediMind AI Agent.
 
 ### Prerequisites
 
-- Python 3.9 or higher
-- Google AI Studio API key
-- Google Places API key
-- Internet connection for API access
+Before you begin, ensure you have the following:
 
-### Setup
+-   **Python 3.9 or higher** installed.
+-   **Google AI Studio API Key** or **Google Cloud Project** with Vertex AI enabled.
+-   **Google Places API Key** for hospital location services.
+-   An active internet connection for API access.
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd agent-demo-health
-   ```
+### Setup Steps
 
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/krupagaliya/MediMind-AI-Agent.git
+    cd MediMind-AI-Agent
+    ```
 
-3. **Set up environment variables**
-   
-   **Option A: Use the setup script (Recommended)**
-   ```bash
-   python setup_env.py
-   ```
-   This will create a `.env` file with all necessary variables. Then edit the `.env` file to add your API keys.
+2.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-   **Option B: Manual setup**
-   Create a `.env` file in the root directory:
-   ```env
-   # For Google AI Studio (default)
-   GOOGLE_API_KEY=your_google_ai_api_key_here
-   GOOGLE_GENAI_USE_VERTEXAI=False
-   
-   # For Vertex AI (alternative)
-   GOOGLE_GENAI_USE_VERTEXAI=True
-   GOOGLE_CLOUD_PROJECT=your_project_id
-   GOOGLE_CLOUD_LOCATION=us-central1
-   GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
-   
-   # Required for both
-   GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
-   DEFAULT_MODEL=gemini-2.0-flash
-   ```
+3.  **Configure Environment Variables:**
 
-4. **Get your API keys**
-   ```bash
-   # For detailed instructions on getting API keys
-   python setup_env.py --help
-   ```
-   
-   **Required API Keys & Authentication:**
-   
-   **Option A: Google AI Studio (Recommended for beginners)**
-   - **Google AI API Key**: Get from [Google AI Studio](https://aistudio.google.com/)
-   - Set `GOOGLE_GENAI_USE_VERTEXAI=False` in `.env`
-   
-   **Option B: Vertex AI (Enterprise/Production)**
-   - **Google Cloud Project**: Create project in [Google Cloud Console](https://console.cloud.google.com/)
-   - **Service Account**: Create service account with Vertex AI permissions
-   - **Service Account Key**: Download JSON key file
-   - Set `GOOGLE_GENAI_USE_VERTEXAI=True` in `.env`
-   - Set `GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json`
-   
-   **Both options require:**
-   - **Google Places API Key**: Get from [Google Cloud Console](https://console.cloud.google.com/)
+    The project uses a `.env` file to manage API keys and other configurations.
 
+    **Option A: Use the setup script (Recommended)**
+    ```bash
+    python setup_env.py
+    ```
+    This script will create a `.env` file with all necessary variables. You will then need to edit this file to add your actual API keys.
 
-5. **Validate your setup**
-   ```bash
-   python setup_env.py --validate
-   ```
+    **Option B: Manual setup**
+    Create a file named `.env` in the root directory of the project and add the following content, replacing the placeholder values with your actual keys:
 
-6. **Choose your AI service**
-   Edit your `.env` file to select either:
-   - **Google AI Studio**: Set `GOOGLE_GENAI_USE_VERTEXAI=False` (default)
-   - **Vertex AI**: Set `GOOGLE_GENAI_USE_VERTEXAI=True` (enterprise)
+    ```env
+    # --- Google AI Service Configuration ---
+    # Choose between Google AI Studio (easier for development) or Vertex AI (for production).
 
-7. **Run the agent**
-   ```bash
-   adk web
-   ```
+    # Option 1: Google AI Studio (Recommended for beginners)
+    # Get your API key from https://aistudio.google.com/
+    GOOGLE_API_KEY=your_google_ai_studio_api_key_here
+    GOOGLE_GENAI_USE_VERTEXAI=False
+
+    # Option 2: Vertex AI (For enterprise/production deployments)
+    # Requires a Google Cloud Project, service account, and JSON key file.
+    # GOOGLE_GENAI_USE_VERTEXAI=True
+    # GOOGLE_CLOUD_PROJECT=your_google_cloud_project_id
+    # GOOGLE_CLOUD_LOCATION=us-central1 # e.g., us-central1
+    # GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json # e.g., ./service-account.json
+
+    # --- Google Places API Configuration ---
+    # Get your API key from Google Cloud Console: https://console.cloud.google.com/
+    GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
+
+    # --- Other Configurations ---
+    DEFAULT_MODEL=gemini-2.0-flash # The AI model to use (e.g., gemini-2.0-flash)
+    ```
+    **Important:** If using Vertex AI, uncomment the relevant lines and provide the correct paths and IDs.
+
+4.  **Validate your setup (Optional but Recommended):**
+    ```bash
+    python setup_env.py --validate
+    ```
+    This command checks if your `.env` file is correctly configured.
+
+### Running the Agent
+
+#### 1. Local Web Interface
+
+To run the agent locally with a web interface, use the ADK command:
+
+```bash
+adk web
+```
+After running, navigate to `http://localhost:8000` in your web browser to interact with the agent.
+
+#### 2. Google Colab Notebook
+
+You can also run the agent using the provided Google Colab notebook:
+
+-   Open `Agent_demo_colab.ipynb` in Google Colab.
+-   Follow the instructions within the notebook to set up the environment and run the agent. This is particularly useful for quick experimentation without a local setup.
+
 
 ## 🚀 Deployment to Google Cloud vertex AI Engine.
 
@@ -268,6 +271,27 @@ python setup_env.py --validate
 ## 🏗️ Architecture
 
 ### Project Structure
+
+```mermaid
+graph TD
+    A[agent-demo-health/] --> B[healthcare_agents/]
+    B --> B1[__init__.py]
+    B --> B2[agent.py]
+    B --> B3[config.py]
+    B --> B4[prompt.py]
+    B --> B5[symptom_agent.py]
+    B --> B6[hospital_finder_agent.py]
+    B --> B7[home_remedies_agent.py]
+    A --> C[setup_env.py]
+    A --> D[deploy.py]
+    A --> E[deploy_guide.md]
+    A --> F[requirements.txt]
+    A --> G[LICENSE]
+    A --> H[Agent_demo_colab.ipynb]
+    A --> I[.env]
+    A --> J[.env1.template]
+    A --> K[README.md]
+```
 
 ```
 agent-demo-health/

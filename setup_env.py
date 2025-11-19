@@ -190,31 +190,41 @@ def show_api_key_instructions():
     print("- Service account JSON files should never be committed to version control")
 
 def main():
-    """Main function"""
+    """
+    Main function to handle command-line arguments for environment setup.
+    Supports creating a .env file, validating it, and showing API key instructions.
+    """
     
     print("🏥 Healthcare Agent System - Environment Setup")
     print("="*50)
     
-    if len(sys.argv) > 1 and sys.argv[1] == "--validate":
-        validate_env_file()
-        return
+    # Parse command-line arguments
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--validate":
+            print("\n🔍 Validating .env file configuration...")
+            validate_env_file()
+            return
+        elif sys.argv[1] == "--help":
+            show_api_key_instructions()
+            return
+        else:
+            print(f"❌ Unknown argument: {sys.argv[1]}")
+            print("Usage: python setup_env.py [--validate | --help]")
+            return
     
-    if len(sys.argv) > 1 and sys.argv[1] == "--help":
-        show_api_key_instructions()
-        return
+    print("\nThis script will guide you through setting up the necessary environment variables for the Healthcare Agent System.")
+    print("You will need API keys from Google AI Studio (or Vertex AI) and Google Cloud Platform (for Places API).")
     
-    print("\nThis script will help you set up the environment variables for the healthcare agent system.")
-    print("You'll need API keys from Google AI Studio and Google Cloud Platform.")
-    
-    # Create .env file
+    # Attempt to create the .env file
     if create_env_file():
         print("\n" + "-"*50)
-        validate_env_file()
+        print("Initial setup complete. Now validating the created .env file...")
+        validate_env_file() # Validate immediately after creation
         
-        print("\n💡 Need help getting API keys? Run:")
+        print("\n💡 For detailed instructions on obtaining API keys, run:")
         print("   python setup_env.py --help")
         
-        print("\n🔍 To validate your .env file later, run:")
+        print("\n🔍 To re-validate your .env file at any time, run:")
         print("   python setup_env.py --validate")
 
 if __name__ == "__main__":
