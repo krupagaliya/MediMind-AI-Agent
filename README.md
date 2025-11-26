@@ -1,6 +1,6 @@
 # Healthcare Agent System - ADK Implementation
 
-A specialized healthcare assistant system built using Google's Agent Development Kit (ADK) framework featuring intelligent symptom analysis and hospital location services for India.
+A specialized healthcare assistant system built using Google's Agent Development Kit (ADK) framework featuring intelligent symptom analysis and hospital location services for UAE.
 
 ## 🏥 Overview
 
@@ -18,7 +18,7 @@ This healthcare agent system features a **coordinator agent** that manages three
 - **Hospital Location**: Finds nearby hospitals and medical facilities using Google Places API
 - **Comprehensive Details**: Provides hospital information including address, phone, rating, and hours
 - **Emergency Hospitals**: Locates emergency hospitals and urgent care centers
-- **India-Focused**: Optimized for Indian healthcare system with local emergency numbers
+- **UAE-Focused**: Optimized for UAE healthcare system with local emergency numbers (999/998)
 
 ### 🌿 Agent 3: Home Remedies Advisor
 - **Natural Remedy Suggestions**: Provides safe, effective home remedies for light symptoms
@@ -46,7 +46,7 @@ This healthcare agent system features a **coordinator agent** that manages three
 ### Current Implementation Features
 
 - **Automatic Location Detection**: No need to ask users for their location
-- **India Emergency Integration**: Uses 108 emergency number
+- **UAE Emergency Integration**: Uses 999 (Police/Fire) and 998 (Ambulance) emergency numbers
 - **Real-time Hospital Search**: Live data from Google Places API
 - **Medical Information Search**: Google Search integration for medical queries
 - **Natural Home Remedies**: Safe, traditional remedies for light symptoms using household items
@@ -199,7 +199,7 @@ The system provides a web interface where users can interact with the healthcare
 - **Emergency Guidance**: Step-by-step instructions for emergency situations
 - **Health Information**: Condition descriptions, symptoms, and care recommendations
 - **Home Remedies**: Natural remedy suggestions with preparation instructions and safety guidance
-- **Safety Reminders**: Always includes medical disclaimers and emergency number (108)
+- **Safety Reminders**: Always includes medical disclaimers and emergency numbers (999/998)
 
 ## 🔧 Configuration
 
@@ -330,7 +330,7 @@ agent-demo-health/
 ### Emergency Situations
 
 In case of medical emergency, call emergency services immediately:
-- **India Emergency Services**: 108
+- **UAE Emergency Services**: 999 (Police/Fire), 998 (Ambulance)
 - **Additional Emergency Numbers**: Available in system responses
 
 ### Data Privacy

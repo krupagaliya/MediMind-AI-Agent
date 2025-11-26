@@ -115,9 +115,9 @@ def find_nearby_hospitals(radius: int = 5000) -> str:
 
 {chr(10).join(hospitals)}
 
-🚨 **EMERGENCY:** For medical emergencies, call **108** immediately (India Emergency Number)
+🚨 **EMERGENCY:** For medical emergencies, call **999** (Police/Fire) or **998** (Ambulance) immediately
 
-💡 **Note:** This information is for reference only. For emergencies, always call 108 first before going to any hospital."""
+💡 **Note:** This information is for reference only. For emergencies, always call 999 or 998 first before going to any hospital."""
 
         return response_text
         
@@ -133,7 +133,7 @@ hospital_finder_agent = LlmAgent(
     model="gemini-2.0-flash",
     description=(
         "Medical facility locator that automatically detects user location and finds nearby hospitals using Google Places API. "
-        "Provides hospital information including addresses, phone numbers, ratings, and hours for India."
+        "Provides hospital information including addresses, phone numbers, ratings, and hours for UAE."
     ),
     instruction=HOSPITAL_FINDER_PROMPT,
     tools=[find_hospitals_tool],
