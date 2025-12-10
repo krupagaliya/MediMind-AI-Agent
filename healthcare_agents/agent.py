@@ -31,7 +31,8 @@ home_remedies_tool = AgentTool(agent=home_remedies_agent)
 # Create the main coordinator agent
 root_agent = LlmAgent(
     name="healthcare_coordinator",
-    model="gemini-2.5-flash",
+    # model="gemini-2.5-flash",
+    model = "gemini-3-pro-preview",
     # model="gemini-2.0-flash-live-001", # Enable for voice mode.
     description=(
         "Main healthcare coordinator that manages three specialized sub-agents: "

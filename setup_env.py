@@ -34,7 +34,7 @@ MAX_REQUESTS_PER_MINUTE=60
 ENABLE_AUDIT_LOG=True
 
 # Healthcare-specific Configuration
-DEFAULT_MODEL=gemini-2.0-flash
+DEFAULT_MODEL=gemini-3-pro-preview
 MODEL_TEMPERATURE=0.7
 MODEL_MAX_TOKENS=2048
 
