@@ -14,12 +14,12 @@ from vertexai.preview.reasoning_engines import AdkApp
 
 
 def load_deployment_config():
-    """Load deployment configuration from .env1 file."""
-    # Load from .env1 file
-    env1_path = ".env1"
+    """Load deployment configuration from deploy.env file."""
+    # Load from deploy.env file
+    env1_path = "deploy.env"
     if not os.path.exists(env1_path):
         print(f"❌ {env1_path} file not found!")
-        print("Please create a .env1 file with your deployment configuration.")
+        print("Please create a deploy.env file with your deployment configuration.")
         return None
     
     load_dotenv(env1_path)
@@ -52,7 +52,7 @@ def validate_config(config):
             missing_vars.append(var)
     
     if missing_vars:
-        print("❌ Missing required environment variables in .env1:")
+        print("❌ Missing required environment variables in deploy.env:")
         for var in missing_vars:
             print(f"   - {var.upper()}")
         return False
@@ -86,12 +86,12 @@ def create_deployment(config):
         display_name=config["deployment_name"],
         description=config["deployment_description"],
         requirements=[
-            "google-adk>=1.0.0",
-            "google-cloud-aiplatform[agent_engines]>=1.93.1",
-            "google-genai>=1.16.1",
-            "pydantic>=2.10.6,<3.0.0",
+            "google-adk==1.15.1",
+            "google-cloud-aiplatform[agent_engines]==1.129.0",
+            "google-genai==1.40.0",
+            "pydantic==2.12.5",
             "requests>=2.32.3,<3.0.0",
-            "python-dotenv>=1.0.0",
+            "python-dotenv==1.2.1",
         ],
         extra_packages=[
             "./healthcare_agents",  # The main package
@@ -125,7 +125,7 @@ def test_deployment(config, resource_id):
     remote_agent = agent_engines.get(resource_id)
     
     # Test with a healthcare-specific query
-    test_message = "I have a fever and headache. Can you help me find nearby hospitals?"
+    test_message = "I have a fever and headache. what should I do?"
     
     print(f"📤 Sending test message: {test_message}")
     print("📥 Response:")
@@ -145,7 +145,7 @@ def main():
     print("🏥 Healthcare Agent Deployment System")
     print("=" * 50)
     
-    # Load configuration from .env1
+    # Load configuration from deploy.env
     config = load_deployment_config()
     if not config:
         return

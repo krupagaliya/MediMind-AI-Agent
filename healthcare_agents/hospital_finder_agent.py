@@ -130,7 +130,7 @@ find_hospitals_tool = FunctionTool(func=find_nearby_hospitals)
 # Create the Hospital Finder Agent with auto-location detection
 hospital_finder_agent = LlmAgent(
     name="hospital_finder",
-    model="gemini-flash-latest",
+    model = "gemini-2.5-flash",
     description=(
         "Medical facility locator that automatically detects user location and finds nearby hospitals using Google Places API. "
         "Provides hospital information including addresses, phone numbers, ratings, and hours for India."
