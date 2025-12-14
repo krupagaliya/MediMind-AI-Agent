@@ -431,6 +431,10 @@ Navigate to `http://localhost:8000` to access the web interface.
    - Voice interaction capabilities
    - Mobile-optimized interface
 
+## 🙏 Acknowledgments
+
+#AISprintH2 - Thanks for this AI Sprint 2025 H2 program and GCP credits
+
 ## 📄 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.

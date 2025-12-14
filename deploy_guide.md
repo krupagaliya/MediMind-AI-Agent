@@ -22,6 +22,8 @@ A comprehensive guide for deploying the Healthcare Agent System to Google Cloud 
 4. **Google Places API** enabled
 5. **Python 3.9+** installed locally
 
+> **⚠️ Important:** Experimental models or models not available in Vertex AI can't be supported. Make sure to use models which are available in Vertex AI and public release. Also keep the version same in local and same with deploy.py.
+
 ### Required Permissions
 
 Your Google Cloud account needs these IAM roles:
@@ -32,9 +34,9 @@ Your Google Cloud account needs these IAM roles:
 
 ## 🔧 Configuration Setup
 
-### 1. Create .env1 File
+### 1. Create deploy.env File
 
-Create a `.env1` file in your project root with the following configuration:
+Create a `deploy.env` file in your project root with the following configuration:
 
 ```env
 # Google Cloud Configuration
@@ -64,6 +66,7 @@ gsutil versioning set on gs://YOUR_BUCKET_NAME
 #### Enable Required APIs
 ```bash
 gcloud services enable aiplatform.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
 gcloud services enable storage.googleapis.com
 gcloud services enable places-backend.googleapis.com
 ```
@@ -188,15 +191,15 @@ python deploy.py create
 
 ### Common Issues
 
-#### 1. Missing .env1 File
-**Error:** `❌ .env1 file not found!`
+#### 1. Missing deploy.env File
+**Error:** `❌ deploy.env file not found!`
 
-**Solution:** Create a `.env1` file with required configuration variables.
+**Solution:** Create a `deploy.env` file with required configuration variables.
 
 #### 2. Missing Environment Variables
-**Error:** `❌ Missing required environment variables in .env1`
+**Error:** `❌ Missing required environment variables in deploy.env`
 
-**Solution:** Ensure all required variables are set in your `.env1` file:
+**Solution:** Ensure all required variables are set in your `deploy.env` file:
 - `GOOGLE_CLOUD_PROJECT`
 - `GOOGLE_CLOUD_LOCATION`
 - `GOOGLE_CLOUD_STORAGE_BUCKET`
@@ -241,8 +244,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 ### 1. Environment Management
 
-- **Use separate .env1 files** for different environments (dev, staging, prod)
-- **Never commit .env1 files** to version control
+- **Use separate .env files** for different environments (dev, staging, prod)
+- **Never commit .env files** to version control
 - **Use descriptive deployment names** to identify different versions
 
 ### 2. Security
@@ -278,7 +281,7 @@ logging.basicConfig(level=logging.DEBUG)
 ```mermaid
 graph TD
     A[Develop Locally] --> B[Test with 'adk web']
-    B --> C[Create .env1 file]
+    B --> C[Create deploy.env file]
     C --> D[Deploy to Vertex AI]
     D --> E[Test Deployment]
     E --> F{Tests Pass?}
@@ -328,4 +331,4 @@ gcloud logging read "resource.type=vertex_ai_reasoning_engine" --limit=50
 
 ---
 
-**Remember:** Always test your deployment after creation to ensure it's working correctly. Keep your `.env1` file secure and never commit it to version control. 
+**Remember:** Always test your deployment after creation to ensure it's working correctly. Keep your `.env` file secure and never commit it to version control. 
