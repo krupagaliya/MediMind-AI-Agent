@@ -16,7 +16,7 @@ load_dotenv()
 # Create the Home Remedies Agent with Google Search for additional remedy information
 home_remedies_agent = LlmAgent(
     name="home_remedies_advisor",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash",
     description=(
         "Knowledgeable home remedies advisor that suggests natural, safe remedies "
         "for light symptoms using common household items. Provides preparation "

@@ -6,9 +6,11 @@ A specialized healthcare assistant system built using Google's Agent Development
 
 This healthcare agent system features a **coordinator agent** that manages three specialized sub-agents:
 
-### 🩺 Agent 1: Symptom Analyzer
+### 🩺 Agent 1: Symptom Analyzer (Multimodal)
 - **Friendly Patient Interaction**: Warmly greets patients and understands their health concerns
-- **Symptom Analysis**: Provides preliminary assessment of symptoms with appropriate recommendations
+- **Multimodal Symptom Analysis**: Analyzes symptoms from both text descriptions and images
+- **Visual Symptom Examination**: Examines rashes, swelling, wounds, discoloration, and other visible conditions
+- **Comprehensive Assessment**: Provides preliminary assessment combining textual and visual information
 - **Health Information**: Delivers information about medical conditions and treatments
 - **Emergency Guidance**: Offers critical emergency medical guidance and instructions
 - **Google Search Integration**: Uses Google Search for additional medical information
@@ -97,7 +99,7 @@ This healthcare agent system features a **coordinator agent** that manages three
    
    # Required for both
    GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
-   DEFAULT_MODEL=gemini-2.0-flash
+   DEFAULT_MODEL=gemini-3-pro-preview
    ```
 
 4. **Get your API keys**
@@ -223,14 +225,14 @@ The system uses a `.env` file for configuration loaded automatically using `pyth
 
 **For Google AI Studio (default):**
 - `GOOGLE_GENAI_USE_VERTEXAI`: Set to `False` (default)
-- `DEFAULT_MODEL`: AI model to use (default: gemini-2.0-flash)
+- `DEFAULT_MODEL`: AI model to use (default: gemini-3-pro-preview)
 
 **For Vertex AI:**
 - `GOOGLE_GENAI_USE_VERTEXAI`: Set to `True`
 - `GOOGLE_CLOUD_PROJECT`: Your Google Cloud project ID (required)
 - `GOOGLE_CLOUD_LOCATION`: Location for Vertex AI (default: us-central1)
 - `GOOGLE_APPLICATION_CREDENTIALS`: Path to service account JSON file (required)
-- `DEFAULT_MODEL`: AI model to use (default: gemini-2.0-flash)
+- `DEFAULT_MODEL`: AI model to use (default: gemini-3-pro-preview)
 
 ### Example Configurations
 
@@ -239,7 +241,7 @@ The system uses a `.env` file for configuration loaded automatically using `pyth
 GOOGLE_API_KEY=your_actual_api_key_here
 GOOGLE_GENAI_USE_VERTEXAI=False
 GOOGLE_PLACES_API_KEY=your_places_api_key_here
-DEFAULT_MODEL=gemini-2.0-flash
+DEFAULT_MODEL=gemini-3-pro-preview
 ```
 
 **Vertex AI Setup (.env file):**
@@ -249,7 +251,7 @@ GOOGLE_CLOUD_PROJECT=your-project-id
 GOOGLE_CLOUD_LOCATION=us-central1
 GOOGLE_APPLICATION_CREDENTIALS=./path/to/your-service-account-key.json
 GOOGLE_PLACES_API_KEY=your_places_api_key_here
-DEFAULT_MODEL=gemini-2.0-flash
+DEFAULT_MODEL=gemini-3-pro-preview
 ```
 
 ### Setup Helper Commands

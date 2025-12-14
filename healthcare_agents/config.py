@@ -29,7 +29,7 @@ class HealthcareAgentConfig:
     GOOGLE_PLACES_API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
     
     # Model Configuration
-    DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "gemini-2.0-flash")
+    DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "gemini-3-pro-preview")
     
     # India-specific Configuration
     EMERGENCY_NUMBER = "108"  # India Emergency Number
